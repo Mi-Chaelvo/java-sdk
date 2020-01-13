@@ -1,5 +1,8 @@
 # APPSDK方法说明
 
+lombok usage
+https://jingyan.baidu.com/article/0a52e3f4e53ca1bf63ed725c.html
+
 APPSDK是提供给APP调用的方法，主要是提供给实现普通转账事务的构造，签名，发送以及孵化器相关的操作，对于RPC来说，提供若干的接口，对于客户端来说，需要提供若干的实现方法，如下所示：
 
 ## 1.0 基本说明
@@ -52,6 +55,9 @@ APPSDK是提供给APP调用的方法，主要是提供给实现普通转账事�
  WalletUtility. pubkeyHashToAddress()
  参数：
  1）、公钥哈希（String)
+ 2）、type（int）
+ 	type: 1  不带“WX”前缀格式的地址 
+	      2  带有“WX”前缀格式的地址
  返回类型：String
  返回值：Address
 ```
@@ -351,6 +357,127 @@ WalletUtility. importKeystore()
  (String)message:null
  }
 ```
+1.28构造签名的规则部署的资产定义事务
+```
+ TxUtility. CreateSignToDeployforRuleAsset()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、Nonce(Long)
+ 4）、code(String)
+ 5）、offering（BigDecimal)
+ 6）、createuser(十六进制字符串)
+ 5）、owner（十六进制字符串)
+ 6）、allowincrease(int)
+ 7）、info(十六进制字符串)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.29构造签名的资产定义的更换资产的规则调用事务
+```
+ TxUtility. CreateSignToDeployforAssetChangeowner()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、事务哈希（十六进制字符串)
+ 3）、私钥（十六进制字符串)
+ 4）、nonce(Long)
+ 5）、newowner(十六进制字符串)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.30构造签名的资产定义的更换资产的增发的规则调用事务
+```
+ TxUtility. CreateSignToDeployforRuleAssetIncreased()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、事务哈希（十六进制字符串)
+ 3）、私钥（十六进制字符串)
+ 4）、nonce(Long)
+ 5）、amount(BigDecimal)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.31构造签名的资产定义的转账的规则调用事务
+```
+ TxUtility. CreateSignToDeployforRuleTransfer()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、事务哈希（十六进制字符串)
+ 3）、私钥（十六进制字符串)
+ 3）、nonce(Long)
+ 6）、from(十六进制字符串)
+ 6）、to(十六进制字符串)
+ 6）、value(BigDecimal)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.0 获取Asset
+```
+*   方法：TxUtility.getAsset(POST)     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ code : String;
+ offering:long
+ totalamount:long
+ createuser:(十六进制字符串)
+ owner:(十六进制字符串)
+ allowincrease:int
+ }
+```
+1.0 获取AssetChangeowner
+```
+*   方法：TxUtility.getAssetChangeowner(POST)     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ newowner:(十六进制字符串)
+ }
+```
+1.0 获取AssetIncreased
+```
+*   方法：TxUtility.getAssetIncreased(POST)     
+*	参数：payload(十六进制字符串)   
+ 返回类型：Json
+ 返回值：
+ {
+ amount:long
+ }
+```
+1.0 获取AssetTransfer
+```
+*   方法：TxUtility.getAssetTransfer(POST)     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ from:(十六进制字符串)
+ to:(十六进制字符串)
+ value:long
+ }
+```
 ### 节点rpc
 1.0 获取Nonce
 ```
@@ -570,7 +697,39 @@ capitalAmount:当前利息总余额
  “message”:String
  }
 ```
-1.37 命令行实现
+
+1.37 浏览器信息
+```
+方法：WisdomCore\ExplorerInfo（GET）
+参数：无
+返回：{"message": "SUCCESS","data": {},"code": 2000}
+data格式: 
+	{
+        "blocksCount": 8547,//24小时内的出块数量
+        "target": "000019b936ba20a901082aca448779aaf1ed4c03204ea6cec85e5cd851c5e956",//难度值
+        "averageBlockInterval": 10.44,//最近十个区块的平均出块时间
+        "averageFee": 0,//平均手续费
+        "pendingTransactions": 0,//在pending中的事务数
+        "queuedTransactions": 0,//在queued中的事务数
+        "lastConfirmedHeight": 15002,//已经写入库的区块数
+        "bestHeight": 15005//forkDB中的区块数
+    },
+    "code": 2000
+```
+1.38 地址的投票信息
+```
+方法：votes\（地址）（GET）
+参数：token=NUMtD0dEXungVX7eLuXkEurH5BCJzw（放在header里面）
+返回："0000000000000000000000000000": {}
+data格式:
+    "1DjBbTrnf3jiDp4z8zucZc8E8rxhGmFXVz": {
+        "address": "1DjBbTrnf3jiDp4z8zucZc8E8rxhGmFXVz",//投票地址
+        "amount": 205000000000,//投票数量
+        "accumulated": 3475608//衰减后的投票权益
+    }
+```
+
+2. 命令行实现
 
 假设SDK编译后的程序名为wcli
 * [Image: image.png]在main方法中调用一个CLIInterface.call传入的参数为main方法中的args参数数组
@@ -593,3 +752,7 @@ CLIInterface类中定义若干的参数处理方法
 * 连接rpc
 传入参数为IP地址、端口号
 返回值为true/false
+
+
+
+

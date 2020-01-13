@@ -10,8 +10,6 @@ import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.sun.activation.registries.LogSupport.log;
-
 public class Main {
     private static final Logger log = Logger.getLogger(Main.class.getName());
     private static Options options = new Options();
@@ -71,7 +69,7 @@ public class Main {
                        ks = WalletUtility.unmarshal(str);
 
                        file.close();
-                       privateKey = new String(Hex.encodeHex(KeystoreAction.decrypt(ks,password)));
+                       privateKey = new String(Hex.encodeHex(KeystoreController.decrypt(ks,password)));
                        System.out.println("privateKey:"+privateKey);
                    }catch (FileNotFoundException e){
                        e.printStackTrace();
