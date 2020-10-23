@@ -3,6 +3,112 @@
 lombok usage
 https://jingyan.baidu.com/article/0a52e3f4e53ca1bf63ed725c.html
 
+JitPack地址：https://jitpack.io/#WisedomChainGroup/java-sdk/
+如果您是JitPack上直接下载依赖，则需要手动导入以下jar包
+
+    <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk15on</artifactId>
+        <version>1.61</version>
+        <scope>compile</scope>
+        </dependency>
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>4.0</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.4</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-math3</artifactId>
+        <version>3.6</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.10</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>2.4</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>commons-cli</groupId>
+        <artifactId>commons-cli</artifactId>
+        <version>1.4</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>1.2.47</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.8.5</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>28.1-jre</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.5.1</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.kosprov.jargon2</groupId>
+        <artifactId>jargon2-api</artifactId>
+        <version>1.1.1</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.kosprov.jargon2</groupId>
+        <artifactId>jargon2-native-ri-backend</artifactId>
+        <version>1.1.1</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>net.java.dev.jna</groupId>
+        <artifactId>jna</artifactId>
+        <version>4.5.2</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.nativelibs4java</groupId>
+        <artifactId>jnaerator-runtime</artifactId>
+        <version>0.12</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.nativelibs4java</groupId>
+        <artifactId>ochafik-util</artifactId>
+        <version>0.12</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>2.0.0.Final</version>
+        <scope>compile</scope>
+    </dependency>
+
 APPSDK是提供给APP调用的方法，主要是提供给实现普通转账事务的构造，签名，发送以及孵化器相关的操作，对于RPC来说，提供若干的接口，对于客户端来说，需要提供若干的实现方法，如下所示：
 
 ## 1.0 基本说明
@@ -97,26 +203,7 @@ APPSDK是提供给APP调用的方法，主要是提供给实现普通转账事�
  返回类型：String（十六进制字符串）
  返回值：Pubkey
 ```
-1.9 导入keystore
-```
-WalletUtility. importKeystore()
- 参数：
- 1）、keystore（String)
- 2）、路径（String)选填
- 返回类型：String
- 返回值：Address
-```
-1.10 修改KeyStore密码方法
-```
- WalletUtility.modifyPassword()
- 参数：
- 1）、keystore（String)
- 2）、旧密码（String)
- 3）、新密码（String)
- 返回类型：json
- 返回值：Keystore
-```
-1.11 SHA3-256哈希方法
+1.9 SHA3-256哈希方法
 ```
  SHA3Utility.HexStringkeccak256()
  参数：
@@ -124,7 +211,7 @@ WalletUtility. importKeystore()
  返回类型：十六进制字符串
  返回值：哈希值
 ```
-1.12 Ripemd-160哈希方法
+1.10 Ripemd-160哈希方法
 ```
  RipemdUtility.HexStringRipemd160()
  参数：
@@ -132,7 +219,7 @@ WalletUtility. importKeystore()
  返回类型：十六进制字符串
  返回值：哈希值
 ```
-1.13 base58编码方法
+1.11 base58编码方法
 ```
  Base58Utility.encode ()
  参数：
@@ -140,7 +227,7 @@ WalletUtility. importKeystore()
  返回类型：String
  返回值：哈希值
 ``` 
-1.14 创建原生转账事务
+1.12 创建原生转账事务
 ```
  TxUtility.CreateRawTransaction()
  参数：
@@ -151,7 +238,7 @@ WalletUtility. importKeystore()
  返回类型：十六进制字符串
  返回值：未签名的事务哈希
 ```
-1.15 签名事务
+1.13 签名事务
 ```
  TxUtility.signRawBasicTransaction()
  参数：
@@ -160,7 +247,7 @@ WalletUtility. importKeystore()
  返回类型：十六进制字符串
  返回值：已签名事务哈希
 ```
-1.16 发起转账申请
+1.14 发起转账申请
 ```
  TxUtility. ClientToTransferAccount()
  参数：
@@ -177,7 +264,7 @@ WalletUtility. importKeystore()
  (String)message:traninfo（已签名事务，十六进制字符串)
  }
  ```
- 1.18 发起存证事务
+ 1.15 发起存证事务
  ```
  TxUtility. ClientToTransferProve()
  参数：
@@ -194,7 +281,7 @@ WalletUtility. importKeystore()
  }
  ```
  
- 1.19 发起投票事务
+ 1.16 发起投票事务
  ```
  TxUtility.ClientToTransferVote()
  参数：
@@ -212,7 +299,7 @@ WalletUtility. importKeystore()
  }
 ```
 
-1.20 发起投票撤回事务
+1.17 发起投票撤回事务
  ```
  TxUtility.ClientToTransferVoteWithdraw()
  参数：
@@ -231,7 +318,7 @@ WalletUtility. importKeystore()
  }
 ```
 
-1.21 发起抵押事务（只能给自己抵押）
+1.18 发起抵押事务（只能给自己抵押）
  ```
  TxUtility.ClientToTransferMortgage()
  参数：
@@ -249,7 +336,7 @@ WalletUtility. importKeystore()
  }
 ```
 
-1.22 发起抵押撤回事务
+1.19 发起抵押撤回事务
  ```
  TxUtility.ClientToTransferMortgageWithdraw()
  参数：
@@ -364,12 +451,12 @@ WalletUtility. importKeystore()
  1）、发送者公钥（十六进制字符串)
  2）、私钥（十六进制字符串)
  3）、Nonce(Long)
- 4）、code(String)
- 5）、offering（BigDecimal)
- 6）、createuser(十六进制字符串)
- 5）、owner（十六进制字符串)
- 6）、allowincrease(int)
- 7）、info(十六进制字符串)
+ 4）、code(String，资产代码)
+ 5）、offering（BigDecimal，期初发行额度)
+ 6）、createuser(十六进制字符串，规则创建者的公钥)
+ 5）、owner（十六进制字符串，规则所有者的地址)
+ 6）、allowincrease(int 是否允许增发 1表示允许，0表示不允许)
+ 7）、info(string 说明)
  返回类型：Json
  返回值：
  {
@@ -386,7 +473,7 @@ WalletUtility. importKeystore()
  2）、事务哈希（十六进制字符串)
  3）、私钥（十六进制字符串)
  4）、nonce(Long)
- 5）、newowner(十六进制字符串)
+ 5）、newowner(十六进制字符串，新的目标用户地址)
  返回类型：Json
  返回值：
  {
@@ -395,15 +482,32 @@ WalletUtility. importKeystore()
  (String)message:null
  }
 ```
-1.30构造签名的资产定义的更换资产的增发的规则调用事务
+1.30构造签名的资产定义的更换资产的规则调用事务(传部署时的160哈希)
+```
+ TxUtility. CreateSignToDeployforAssetChangeownerAsHash160()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、160哈希（十六进制字符串 资产部署时的160哈希值)
+ 3）、私钥（十六进制字符串)
+ 4）、nonce(Long)
+ 5）、newowner(十六进制字符串，新的目标用户地址)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.31构造签名的资产定义的资产增发的规则调用事务
 ```
  TxUtility. CreateSignToDeployforRuleAssetIncreased()
  参数：
  1）、发送者公钥（十六进制字符串)
- 2）、事务哈希（十六进制字符串)
+ 2）、160哈希（十六进制字符串)
  3）、私钥（十六进制字符串)
  4）、nonce(Long)
- 5）、amount(BigDecimal)
+ 5）、amount(BigDecimal，增发的金额)
  返回类型：Json
  返回值：
  {
@@ -412,17 +516,34 @@ WalletUtility. importKeystore()
  (String)message:null
  }
 ```
-1.31构造签名的资产定义的转账的规则调用事务
+1.32构造签名的资产定义的资产增发的规则调用事务(传部署时的160哈希)
+```
+ TxUtility. CreateSignToDeployforRuleAssetIncreasedAsHash160()
+ 参数：
+ 1）、发送者公钥（十六进制字符串 资产部署时的160哈希值)
+ 2）、160哈希（十六进制字符串)
+ 3）、私钥（十六进制字符串)
+ 4）、nonce(Long)
+ 5）、amount(BigDecimal，增发的金额)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.33构造签名的资产定义的转账的规则调用事务
 ```
  TxUtility. CreateSignToDeployforRuleTransfer()
  参数：
  1）、发送者公钥（十六进制字符串)
- 2）、事务哈希（十六进制字符串)
+ 2）、事务哈希（十六进制字符串，资产部署时的事务哈希)
  3）、私钥（十六进制字符串)
- 3）、nonce(Long)
- 6）、from(十六进制字符串)
- 6）、to(十六进制字符串)
- 6）、value(BigDecimal)
+ 4）、nonce(Long)
+ 5）、from(十六进制字符串，公钥)
+ 6）、to(十六进制字符串，目标地址的公钥哈希)
+ 7）、value(BigDecimal，转发金额，必须大于0，整数)
  返回类型：Json
  返回值：
  {
@@ -431,53 +552,682 @@ WalletUtility. importKeystore()
  (String)message:null
  }
 ```
-1.0 获取Asset
+1.34构造签名的资产定义的转账的规则调用事务（传部署的160哈希）
 ```
-*   方法：TxUtility.getAsset(POST)     
+ TxUtility.CreateSignToDeployforRuleTransferAsHash160()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、160哈希（十六进制字符串，资产部署时的160哈希值)
+ 3）、私钥（十六进制字符串)
+ 4）、nonce(Long)
+ 5）、from(十六进制字符串，公钥)
+ 6）、to(十六进制字符串，目标地址的公钥哈希)
+ 7）、value(BigDecimal，转发金额，必须大于0，整数)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.35 获取Asset资产部署的详细信息
+```
+*   方法：TxUtility.getAsset()     
 *	参数：payload(十六进制字符串)  
  返回类型：Json
  返回值：
  {
- code : String;
- offering:long
- totalamount:long
- createuser:(十六进制字符串)
- owner:(十六进制字符串)
- allowincrease:int
+  data : Transaction;
+ (int)statusCode:2000
+ (String)message::对象的所有参数
  }
 ```
-1.0 获取AssetChangeowner
+1.36 获取AssetChangeowner资产更换所有者的详细信息
 ```
-*   方法：TxUtility.getAssetChangeowner(POST)     
+*   方法：TxUtility.getAssetChangeowner()     
 *	参数：payload(十六进制字符串)  
  返回类型：Json
  返回值：
  {
- newowner:(十六进制字符串)
+  data : Transaction;
+ (int)statusCode:2000
+ (String)message::对象的所有参数
  }
 ```
-1.0 获取AssetIncreased
+1.37 获取AssetIncreased资产增发的详细信息
 ```
-*   方法：TxUtility.getAssetIncreased(POST)     
+*   方法：TxUtility.getAssetIncreased()
 *	参数：payload(十六进制字符串)   
  返回类型：Json
  返回值：
  {
- amount:long
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message::对象的所有参数
  }
 ```
-1.0 获取AssetTransfer
+1.38 获取AssetTransfer资产转账的详细信息
 ```
-*   方法：TxUtility.getAssetTransfer(POST)     
+*   方法：TxUtility.getAssetTransfer()     
 *	参数：payload(十六进制字符串)  
  返回类型：Json
  返回值：
  {
- from:(十六进制字符串)
- to:(十六进制字符串)
- value:long
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message:对象的所有参数
  }
 ```
+
+1.39构造签名的多重规则部署（发布者签名）
+```
+ TxUtility. CreateMultipleToDeployforRuleFirst()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、Nonce(Long) 发布人的当前nonce
+ 4）、assetHash(十六进制字符串  资产的哈希值)
+ 5）、max(int   总计可以具备的签名数)
+ 6）、min(int   最少需要达到的签名数)
+ 7）、publist(十六进制字符串的集合  公钥数组)
+ 8）、amount(BigDecimal   总额)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ (String)pubkeyFirstSign:(十六进制字符串，发布者未签名的事务构造)
+ (String)pubkeyFirst:(十六进制字符串，发布者公钥)
+ (String)signFirst:(十六进制字符串，发布者签名的事务构造)
+ (String)data:(十六进制字符串)
+ (String)message:(十六进制字符串)
+ }
+```
+1.40构造签名的多重签名的部署（其他人签名）
+```
+ TxUtility. CreateMultipleToDeployforRuleOther()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、pubFirstSign（十六进制字符串，发布者签名返回的pubkeyFirstSign字段)
+ 3）、私钥（十六进制字符串)
+ 4）、isPutSign(boolean 是否签名   true:签名  false:不签名)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ (String)pubkeyOther:(十六进制字符串，其他人的公钥)
+ (String)signOther:(十六进制字符串，其他人的签名)
+ }
+```
+1.41构造签名的多重规则部署(拼接签名)
+```
+ TxUtility. CreateMultipleToDeployforRuleSignSplice()
+ 参数：
+ 1）、发布者私钥（十六进制字符串)
+ 2）、pubFirstSign（十六进制字符串，发布者签名返回的pubkeyFirstSign字段)
+ 3）、发布者公钥（十六进制字符串)
+ 4）、nonce(Long    发布者当前的nonce)
+ 5）、signFirst(十六进制字符串， 发布者签名返回的signFirst或者拼接后的签名返回的message)
+ 6）、pubkeyOther(十六进制字符串， 其他人签名返回的pubkeyOther字段)
+ 7）、signOther(十六进制字符串，  其他人签名返回的signOther字段)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:(十六位进制字符串  拼接完之后签名)
+ }
+```
+1.42构造签名转账的多重签名（发布者签名）
+```
+ TxUtility. CreateMultisignatureToDeployforRuleFirst()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、Nonce(Long) 发布人的当前nonce
+ 4）、事务哈希（十六进制字符串)
+ 5）、origin(int   来源账户类型，1表示多签地址，0表示普通账户地址)
+ 6）、dest(int   目标账户类型，1表示多签地址，0表示普通账户地址)
+ 7）、pubhash(十六进制字符串的集合   公钥数组)
+ 8）、to（十六进制字符串   普通地址所对应的公钥哈希或者多签地址对应的事务哈希)
+ 9）、value(BigDecimal   转账金额)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ (String)pubkeyFirstSign:(十六进制字符串，发布者未签名的事务构造)
+ (String)pubkeyFirst:(十六进制字符串，发布者公钥)
+ (String)signFirst:(十六进制字符串，发布者签名的事务构造)
+ (String)data:(十六进制字符串)
+ }
+```
+1.43构造签名转账的多重签名（其他人签名）
+```
+ TxUtility. CreateMultisignatureToDeployforRuleOther()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、pubFirstSign（十六进制字符串，发布者签名返回的pubkeyFirstSign字段)
+ 3）、私钥（十六进制字符串)
+ 4）、isPutSign(boolean   是否签名)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ (String)pubkeyOther:(十六进制字符串，其他人的公钥)
+ (String)signOther:(十六进制字符串，其他人的签名)
+ }
+```
+1.44 构造签名转账的多重签名(拼接签名)
+```
+ TxUtility. CreateMultisignatureToDeployforRuleSignSplice()
+ 参数：
+ 1）、发布者私钥（十六进制字符串)
+ 2）、pubFirstSign（十六进制字符串，发布者签名返回的pubkeyFirstSign字段)
+ 3）、发布者公钥（十六进制字符串)
+ 4）、事务哈希（十六进制字符串)
+ 5）、nonce(Long    发布者当前的nonce)
+ 6）、 signFirst(十六进制字符串，  发布者签名或者拼接后的签名)
+ 7）、 pubkeyOther(十六进制字符串，公钥)
+ 8）、 signOther(十六进制字符串，   其他人的签名)
+ 9）、 type(int，   1为单对多   2为多对单  3为多对多)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:(拼接后的签名)
+ }
+```
+1.45构造签名转账的多重签名（发布者签名）(多签部署的160哈希)
+```
+ TxUtility. CreateMultisignatureToDeployforRuleFirstAsHash160()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、Nonce(Long) 发布人的当前nonce
+ 4）、160哈希（十六进制字符串   多签部署时的160哈希值)
+ 5）、origin(int   来源账户类型，1表示多签地址，0表示普通账户地址)
+ 6）、dest(int   目标账户类型，1表示多签地址，0表示普通账户地址)
+ 7）、pubhash(十六进制字符串的集合   公钥数组)
+ 8）、to（十六进制字符串   普通地址所对应的公钥哈希或者多签地址对应的事务哈希)
+ 9）、value(BigDecimal   转账金额)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ (String)pubkeyFirstSign:(十六进制字符串，发布者未签名的事务构造)
+ (String)pubkeyFirst:(十六进制字符串，发布者公钥)
+ (String)signFirst:(十六进制字符串，发布者签名的事务构造)
+ (String)data:(十六进制字符串)
+ }
+```
+1.46构造签名转账的多重签名（其他人签名）（多签部署的160哈希）
+```
+ TxUtility. CreateMultisignatureToDeployforRuleOtherAsHash160()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、pubFirstSign（十六进制字符串，发布者签名返回的pubkeyFirstSign字段)
+ 3）、私钥（十六进制字符串)
+ 4）、isPutSign(boolean   是否签名)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ (String)pubkeyOther:(十六进制字符串，其他人的公钥)
+ (String)signOther:(十六进制字符串，其他人的签名)
+ }
+```
+1.47 构造签名转账的多重签名(拼接签名)(多签部署的160哈希)
+```
+ TxUtility. CreateMultisignatureToDeployforRuleSignSpliceAsHash160()
+ 参数：
+ 1）、发布者私钥（十六进制字符串)
+ 2）、pubFirstSign（十六进制字符串，发布者签名返回的pubkeyFirstSign字段)
+ 3）、发布者公钥（十六进制字符串)
+ 4）、160哈希（十六进制字符串    多签部署时的160哈希值)
+ 5）、nonce(Long    发布者当前的nonce)
+ 6）、 signFirst(十六进制字符串，  发布者签名或者拼接后的签名)
+ 7）、 pubkeyOther(十六进制字符串，公钥)
+ 8）、 signOther(十六进制字符串，   其他人的签名)
+ 9）、 type(int，   1为单对多   2为多对单  3为多对多)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:(拼接后的签名)
+ }
+```
+1.48 获取Multiple多签部署的详细信息
+```
+*   方法：TxUtility.getMultiple()     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message:对象的所有参数
+ }
+```
+1.49 获取MultTransfer多签规则转账的详细信息
+```
+*   方法：TxUtility.getMultTransfer()     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message:对象的所有参数
+ }
+```
+1.50 构造签名的时间锁定的事务
+```
+ TxUtility. CreateHashTimeBlockForDeploy()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、nonce（long)
+ 4）、assetHash(十六进制字符串    资产哈希)
+ 5）、pubkeyHash(十六进制字符串   公钥哈希)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.51 构造签名的获得锁定资产事务
+```
+ TxUtility. CreateHashTimeBlockGetForDeploy()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、事务哈希（十六进制字符串)
+ 4）、nonce(int)
+ 5）、transferhash(十六进制字符串   签发事务的哈希)
+ 6）、origintext(十六进制字符串   原文)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.52 构造签名的获得锁定资产事务(部署时间锁定的160哈希)
+```
+ TxUtility. CreateHashTimeBlockGetForDeployAsHash160()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、160哈希（十六进制字符串   时间锁定部署的160哈希)
+ 4）、nonce(int)
+ 5）、transferhash(十六进制字符串   签发事务的哈希)
+ 6）、origintext(十六进制字符串   原文)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.53 构造签名的时间锁定的转发资产事务
+```
+ TxUtility. CreateHashTimeBlockTransferForDeploy()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、事务哈希（十六进制字符串)
+ 4）、nonce(int)
+ 5）、value(BigDecimal   金额)
+ 6）、hashresult(十六进制字符串   原文)
+ 7）、timestamp(时间戳)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.54 构造签名的时间锁定的转发资产事务(部署时间锁定的160哈希)
+```
+ TxUtility. CreateHashTimeBlockTransferForDeployAsHash160()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、160哈希（十六进制字符串  时间锁定部署的160哈希)
+ 4）、nonce(int)
+ 5）、value(BigDecimal   金额)
+ 6）、hashresult(十六进制字符串   原文)
+ 7）、timestamp(时间戳)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.55 构造签名的区块高度锁定支付事务
+```
+ TxUtility. CreateHashHeightBlockForDeploy()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、nonce（long)
+ 4）、assetHash(十六进制字符串   资产哈希)
+ 5）、pubkeyHash(十六进制字符串  公钥哈希)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.56 构造签名的区块高度获得锁定资产事务
+```
+ TxUtility. CreateHashHeightBlockGetForDeploy()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、事务哈希（十六进制字符串)
+ 4）、nonce(int)
+ 5）、transferhash(十六进制字符串  转账事务的哈希)
+ 6）、origintext(十六进制字符串  原文)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.57 构造签名的区块高度获得锁定资产事务(区块高度锁定部署的160哈希)
+```
+ TxUtility. CreateHashHeightBlockGetForDeployAsHash160()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、160哈希（十六进制字符串 区块高度部署时的160哈希)
+ 4）、nonce(int)
+ 5）、transferhash(十六进制字符串  转账事务的哈希)
+ 6）、origintext(十六进制字符串  原文)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.58 构造签名的区块高度锁定的转发资产事务
+```
+ TxUtility. CreateHashHeightBlockTransferForDeploy()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、事务哈希（十六进制字符串)
+ 4）、nonce(int)
+ 5）、value(BigDecimal   金额)
+ 6）、hashresult(十六进制字符串  原文)
+ 7）、timestamp(时间戳)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.59 构造签名的区块高度锁定的转发资产事务（传160哈希）
+```
+ TxUtility. CreateHashHeightBlockTransferForDeployAsHash160()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、160哈希（十六进制字符串 区块高度部署时的160哈希)
+ 4）、nonce(int)
+ 5）、value(BigDecimal   金额)
+ 6）、hashresult(十六进制字符串  原文)
+ 7）、timestamp(时间戳)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:0
+ (String)message:null
+ }
+```
+1.60 获取Hashtimeblock时间锁定支付的详细信息
+```
+*   方法：TxUtility.getHashtimeblock()     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message:对象的所有参数
+ }
+```
+1.61 获得HashtimeblockGet时间锁定支付获得锁定资产的详细信息
+```
+*   方法：TxUtility.getHashtimeblockGet()     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message:对象的所有参数
+ }
+```
+1.62 获得HashtimeblockTransfer时间锁定支付转发资产的详细信息
+```
+*   方法：TxUtility.getHashtimeblockTransfer()     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message:对象的所有参数
+ }
+```
+1.63 获取Hashheightblock区块高度锁定的详细信息
+```
+*   方法：TxUtility.getHashheightblock()     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message:对象的所有参数
+ }
+```
+1.64 获取HashheightblockGet区块高度锁定获得锁定资产的详细信息
+```
+*   方法：TxUtility.getHashheightblockGet()     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message:对象的所有参数
+ }
+```
+1.65 获得HashheightblockTransfer区块高度锁定转发资产的详细信息
+```
+*   方法：TxUtility.getHashheightblockTransfer()     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message:对象的所有参数
+ }
+```
+1.66 通过事务哈希转公钥哈希
+``` 
+*   方法：TxUtility.txhashTopubhash()     
+*	参数：事务哈希(十六进制字符串)  
+ 返回类型：String
+ 返回值：
+ {
+ 公钥哈希：String
+ }
+```
+1.67 构造签名的部署定额条件比例支付事务
+```
+ TxUtility. CreateRateheightlockruleForDeploy()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、nonce（long)
+ 4）、assetHash(十六进制字符串   资产哈希)
+ 5）、onetimedepositmultiple(Bigdecimal
+                            每次往规则转入对应资产的倍数关系)
+ 6）、withdrawperiodheight(int  资产的提取高度周期)
+ 7）、withdrawrate(int  提取比率)
+ 8）、dest(十六位进制字符串  目标地址)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000/5000
+ (String)message:null
+ }
+```
+1.68 构造签名的调用定额条件比例支付的转入金额事务
+```
+ TxUtility. CreateRateheightlockDepositRuleForDeploy()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、txHashCreate(十六进制字符串   部署定额条件比例支付返回的事务哈希)
+ 4）、nonce（long)
+ 5）、value(Bigdecimal  用户转入的指定金额)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000/5000
+ (String)message:null
+ }
+```
+1.69 构造签名的调用定额条件比例支付的转入金额事务（传160哈希）
+```
+ TxUtility. CreateRateheightlockDepositRuleForDeployAsHash160()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、私钥（十六进制字符串)
+ 3）、txHashCreate(十六进制字符串   部署定额条件比例支付的160哈希)
+ 4）、nonce（long)
+ 5）、value(Bigdecimal  用户转入的指定金额)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000/5000
+ (String)message:null
+ }
+```
+1.70 构造签名的调用定额条件比例支付的转出事务
+```
+ TxUtility. CreateRateheightlockWithdrawRuleForDeploy()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、txHashCreate(十六进制字符串   部署定额条件比例支付返回的事务哈希)
+ 3）、私钥（十六进制字符串)
+ 4）、nonce（long)
+ 5）、deposithash(十六进制字符串                 
+                    构造转入金额条件比例支付返回的事务哈希)
+ 6）、to(十六进制字符串  公钥哈希，可能是普通账户也可能是多签)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000/5000
+ (String)message:null
+ }
+```
+1.71 构造签名的调用定额条件比例支付的转出事务（传160哈希）
+```
+ TxUtility. CreateRateheightlockWithdrawRuleForDeployAsHash160()
+ 参数：
+ 1）、发送者公钥（十六进制字符串)
+ 2）、txHashCreate(十六进制字符串   部署定额条件比例支付的160哈希)
+ 3）、私钥（十六进制字符串)
+ 4）、nonce（long)
+ 5）、deposithash(十六进制字符串                 
+                    构造转入金额条件比例支付返回的事务哈希)
+ 6）、to(十六进制字符串  公钥哈希，可能是普通账户也可能是多签)
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000/5000
+ (String)message:null
+ }
+```
+1.72 获取Rateheightlock定额条件比例支付的转入金额事务的详细信息
+```
+*   方法：TxUtility.getRateheightlock()     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message:对象的所有参数
+ }
+```
+1.73 获取RateheightlockDeposit区块高度锁定获得锁定资产的详细信息
+```
+*   方法：TxUtility.getRateheightlockDeposit()     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message:对象的所有参数
+ }
+```
+1.74 获取RateheightlockWithdraw定额条件比例支付的转出的详细信息
+```
+*   方法：TxUtility.getRateheightlockWithdraw()     
+*	参数：payload(十六进制字符串)  
+ 返回类型：Json
+ 返回值：
+ {
+ data : Transaction;
+ (int)statusCode:2000
+ (String)message:对象的所有参数
+ }
+```
+
 ### 节点rpc
 1.0 获取Nonce
 ```

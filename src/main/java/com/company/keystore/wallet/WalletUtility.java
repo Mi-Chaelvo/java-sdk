@@ -2,33 +2,23 @@ package com.company.keystore.wallet;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.company.ApiResult.APIResult;
 import com.company.keystore.crypto.*;
 import com.company.keystore.crypto.ed25519.Ed25519PrivateKey;
 import com.company.keystore.crypto.ed25519.Ed25519PublicKey;
 import com.company.keystore.util.Base58Utility;
 import com.company.keystore.util.ByteUtil;
-import com.company.keystore.util.ByteUtils;
 import com.company.keystore.util.Utils;
 import com.google.common.primitives.Bytes;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import org.apache.commons.codec.DecoderException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import java.util.logging.Logger;
 
 public class WalletUtility {
 
@@ -209,7 +199,25 @@ public class WalletUtility {
             byte[] b4 = ByteUtil.bytearraycopy(r3, 0, 4);
             byte[] b5 = ByteUtil.byteMerger(r2, b4);
             String s6 = Base58Utility.encode(b5);
-            return type == 1 ? s6 : "WX"+s6;
+            return type == 1 ? s6 : s6;
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+
+    /*
+      代币哈希转地址
+   */
+    public static String coinHashToAddress(String r1Str,int type) {
+        try {
+            byte[] r1 = Hex.decodeHex(r1Str.toCharArray());
+            byte[] r2 = ByteUtil.prepend(r1, (byte) 0x00);
+            byte[] r3 = SHA3Utility.keccak256(SHA3Utility.keccak256(r1));
+            byte[] b4 = ByteUtil.bytearraycopy(r3, 0, 4);
+            byte[] b5 = ByteUtil.byteMerger(r2, b4);
+            String s6 = Base58Utility.encode(b5);
+            return type == 1 ? s6 : "WR"+s6;
         } catch (Exception e) {
             return "";
         }
@@ -313,20 +321,14 @@ public class WalletUtility {
      */
     public static String prikeyToPubkey(String prikey) {
         try {
-            if (prikey.length() == 64) {
-                if (new BigInteger(Hex.decodeHex(prikey.toCharArray())).compareTo(new BigInteger(ByteUtils.hexStringToBytes(t))) > 0) {
-                    return "";
-                }
-            } else if (prikey.length() == 128) {
-                if (new BigInteger(Hex.decodeHex(prikey.substring(0, 64).toCharArray())).compareTo(new BigInteger(ByteUtils.hexStringToBytes(t))) > 0) {
-                    return "";
-                }
-            }
+            System.out.println("===========================prikey:"+prikey);
             Ed25519PrivateKey eprik = new Ed25519PrivateKey(Hex.decodeHex(prikey.toCharArray()));
             Ed25519PublicKey epuk = eprik.generatePublicKey();
             String pubkey = new String(Hex.encodeHex(epuk.getEncoded()));
             return pubkey;
         } catch (Exception e) {
+            System.out.println("===========================异常");
+            e.printStackTrace();
             return "";
         }
     }
